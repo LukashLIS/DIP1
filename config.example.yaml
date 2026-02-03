@@ -1,0 +1,29 @@
+pipeline:
+  sample_rate: 16000
+  language: auto
+  target_language: ru
+  keep_timestamps: true
+
+models:
+  diarization:
+    provider: pyannote
+    model: "pyannote/speaker-diarization"
+  asr:
+    provider: faster-whisper
+    model: "large-v3"
+  understanding:
+    provider: transformers
+    model: "facebook/mbart-large-50-many-to-many-mmt"
+  translation:
+    provider: transformers
+    model: "facebook/nllb-200-distilled-600M"
+  tts:
+    provider: coqui
+    model: "tts_models/multilingual/multi-dataset/xtts_v2"
+  voice_conversion:
+    provider: rvc
+    model: "your-rvc-model-path"
+
+io:
+  tmp_dir: ./tmp
+  keep_intermediate: false
